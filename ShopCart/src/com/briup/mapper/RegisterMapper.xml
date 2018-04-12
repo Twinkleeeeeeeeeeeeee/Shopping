@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+
+<mapper namespace="com.briup.mapper.RegisterMapper"> 
+  <insert id="insertUser" parameterType="RegisterUser">
+  	<selectKey keyProperty="id" resultType="int" order="BEFORE">
+  		 select customer_seq.nextval from dual
+  	</selectKey>
+  	insert into customer(id,name, password, zip, address, telephone, email) values(#{id},#{name},#{password},#{zip},#{address},#{telephone},#{email})
+  </insert>
+  <select id="findUser" parameterType="int" resultType="RegisterUser">
+  	select * from customer where id=#{id}
+  </select>
+  <select id="findUserByName" parameterType="String">
+  	select name from customer where name=#{name}
+  </select>
+  <select id="findAllUser" resultType="RegisterUser">
+  	select * from customer 
+  </select>
+</mapper> 
